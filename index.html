@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" style="width: 500px">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>阿里云盘批量转存</title>
+    <link href="bootstrap.min.css" rel="stylesheet" />
+    <style>
+      /* 自定义样式 */
+      .log-container {
+        max-height: 400px; /* 设置列表的最大高度 */
+        overflow-y: auto; /* 添加垂直滚动条 */
+        border: 1px solid #dee2e6; /* 边框样式 */
+        border-radius: 0.25rem; /* 圆角边框 */
+        padding: 0;
+      }
+
+      .log-list {
+        list-style: none; /* 移除列表前的默认样式 */
+        padding: 0;
+        margin: 0;
+      }
+
+      .log-list li {
+        padding: 10px;
+        border-bottom: 1px solid #dee2e6; /* 分隔线样式 */
+      }
+
+      .log-list li:last-child {
+        border-bottom: none; /* 最后一项不显示分隔线 */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container" style="margin: 10px 0px">
+      <div class="row">
+        <div class="col col-4">
+          <h1>日志信息</h1>
+        </div>
+        <div class="col col-5">
+          <span
+            class="align-baseline"
+            style="
+              position: relative;
+              top: 6px;
+              left: -36px;
+              font-size: 13px;
+              color: gray;
+            "
+            >(重新开始请刷新浏览器)</span
+          >
+        </div>
+        <div class="col col-3" style="text-align: right">
+          <button id="startTransfer" type="button" class="btn btn-primary">
+            开始转存
+          </button>
+        </div>
+      </div>
+
+      <div class="log-container">
+        <ul id="logList" class="log-list"></ul>
+      </div>
+    </div>
+    <script src="bootstrap.bundle.min.js"></script>
+    <script src="index.js"></script>
+  </body>
+</html>

@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "批量转存阿里云分享",
+  "version": "1.0",
+  "description": "批量转存阿里云分享",
+  "permissions": ["activeTab"],
+  "action": {
+    "default_popup": "index.html",
+    "default_icon": {
+    }
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ]
+}
