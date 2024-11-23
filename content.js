@@ -147,7 +147,11 @@ async function save_shared_folder(source_folder_id, target_folder_id) {
 
       for (const folder of folder_list) {
         try {
-          await save_shared_folder(folder["file_id"], target_folder_id);
+          var new_folder = await create_folder(
+            target_folder_id,
+            folder["name"]
+          );
+          await save_shared_folder(folder["file_id"], new_folder["file_id"]);
         } catch (e) {
           sendMessage(`处理文件夹 ${folder["name"]} 时出错: ${e}`);
         }
@@ -178,21 +182,16 @@ async function batch_copy_files(file_list, to_parent_file_id) {
       method: "POST",
       url: "/file/copy",
     });
-
-    let data = {
-      requests: requests_data,
-      resource: "file",
-    };
-
-    let result = await make_request_async(
-      "/adrive/v4/batch",
-      "POST",
-      true,
-      data
-    );
-
-    return result.responses[0];
   }
+
+  let data = {
+    requests: requests_data,
+    resource: "file",
+  };
+
+  let result = await make_request_async("/adrive/v4/batch", "POST", true, data);
+
+  return result.responses[0];
 }
 
 async function list_files(parent_file_id, limit) {
@@ -319,7 +318,7 @@ async function make_request_async(url, request_type, head_flag, data) {
   }
 }
 
-function create_folder(parent_file_id, folder_name) {
+async function create_folder(parent_file_id, folder_name) {
   return make_request("/adrive/v2/file/createWithFolders", "post", false, {
     drive_id: drive_id,
     parent_file_id: parent_file_id,
